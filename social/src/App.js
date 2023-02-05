@@ -15,33 +15,33 @@ import { LOADER_END } from "./redux/auth/top-loader/loadertypes";
 import AuthReject from "./privateRoute/AuthReject";
 import { useEffect } from "react";
 import { tokenUser } from "./redux/auth/authAction";
-import AuthRedirect from "./privateRoute/AuthRedirect";
 import Cookies from "js-cookie";
+import Loginpage from "./pages/Login/Loginpage";
+import RegisterPages from "./pages/Registerpage/RegisterPages";
+import AuthRedirect from "./privateRoute/AuthRedirect";
+import Friends from "./pages/Friends/Friends";
+import LoginRoute from "./privateRoute/LoginRoute";
+import LogoutRoute from "./privateRoute/LogoutRoute";
 
 function App() {
-  const authToken = Cookies.get("authToken");
+  const token = Cookies.get("authToken");
   const loader = useSelector((state) => state.loader);
+  const loaderdispatch = useDispatch();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // console.log(token);
-  // useEffect(() => {
-  //   if (token) {
-  //     tokenDispatch(tokenUser(token));
-  //   }
-  // }, [tokenDispatch]);
   useEffect(() => {
-    if (authToken) {
-      dispatch(tokenUser(authToken, navigate));
+    if (token) {
+      dispatch(tokenUser(token, navigate));
     }
-  }, [dispatch, authToken]);
+  }, [token, dispatch]);
 
   return (
     <>
       <LoadingBar
         color="#1876f2"
         progress={loader}
-        onLoaderFinished={() => dispatch({ type: LOADER_END })}
+        onLoaderFinished={() => loaderdispatch({ type: LOADER_END })}
       />
       <ToastContainer
         style={{ zIndex: 999999 }}
@@ -53,23 +53,18 @@ function App() {
       />
       <Routes>
         <Route path="/activation/:type" element={<Activation />} />
-        <Route
-          path="/"
-          element={
-            <AuthRedirect>
-              <Home />
-            </AuthRedirect>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <AuthReject>
-              <Auth />
-            </AuthReject>
-          }
-        />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Home />} />
+
+        <Route element={<LogoutRoute />}>
+          <Route path="/login" element={<Loginpage />} />
+          <Route path="/register" element={<RegisterPages />} />
+        </Route>
+
+        <Route element={<LoginRoute />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/Friends" element={<Friends />} />
+        </Route>
+
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/findaccound" element={<Findaccound />} />
         <Route path="/change-password" element={<Password />} />

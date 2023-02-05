@@ -1,19 +1,28 @@
 import React from "react";
-import user from "../../assets/images/user.png";
-import Avatar from "../../components/Avatar/Avatar";
+import { useSelector } from "react-redux";
 import Sidebar from "../../components/Sicebar/Sidebar";
 import Timeline from "../../components/Timeline/Timeline";
+import Auth from "../Auth/Auth";
 import Homeheader from "../HomeHeader/Homeheader";
 
 const Home = () => {
+  const { loginState } = useSelector((state) => state.auth);
+
   return (
     <>
-      <Homeheader />
-      <div className="fb-home-body">
-        <Sidebar />
+      {loginState ? (
+        <>
+          <Homeheader />
 
-        <Timeline />
-      </div>
+          <div className="fb-home-body">
+            <Sidebar />
+
+            <Timeline />
+          </div>
+        </>
+      ) : (
+        <Auth />
+      )}
     </>
   );
 };

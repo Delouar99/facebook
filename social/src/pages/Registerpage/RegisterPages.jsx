@@ -1,91 +1,18 @@
-import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import headerlogo from "../../assets/icons/facebook.svg";
-import createToast from "../../Utility/Toast.jsx";
-const Forgot = () => {
-  const [auth, setAuth] = useState("");
-
-  const navigate = useNavigate();
-
-  //input change handelar
-  const handleInputChange = (e) => {
-    setAuth(e.target.value);
-  };
-
-  //handle find user
-  const handlefindUser = (e) => {
-    e.preventDefault();
-    if (!auth) {
-      createToast("Input Feild is Requird", "warn");
-    } else {
-      axios
-        .post("/api/v1/user/find-user-account", {
-          auth,
-        })
-        .then((res) => {
-          navigate("/findaccound");
-        })
-        .catch((error) => {
-          createToast(error.response.data.message);
-        });
-    }
-  };
+import React, { useState } from "react";
+import fblogo from "../../assets/icons/facebook.svg";
+import Register from "../../components/Register/Register";
+const RegisterPages = () => {
+  const [register, setRegister] = useState(false);
   return (
     <>
-      <div className="reset-header">
-        <div className="reset-header-wraper">
-          <div className="reset-logo">
-            <img src={headerlogo} alt="" />
-          </div>
-          <div className="login-part">
-            <input type="text" placeholder="Email or mobile number" />
-            <input type="text" placeholder="Password" />
-            <button>Log In</button>
-            <a href="#">Forgotten account?</a>
-          </div>
-        </div>
-      </div>
-
-      <div className="reset-area">
-        <div className="reset-wraper">
-          <div className="reset-box">
-            <div className="reset-box-header">
-              <span className="title">Find Your Account</span>
-            </div>
-            <div className="reset-body">
-              <p>
-                Please enter your email address or mobile number to search for
-                your account.
-              </p>
-              <div className="code-box">
-                <input
-                  className="w-100"
-                  name="auth"
-                  value={auth}
-                  onChange={handleInputChange}
-                  type="text"
-                  placeholder="Email address or mobile number"
-                />
-              </div>
-            </div>
-            <div className="reset-footer">
-              <a href="#"></a>
-              <div className="reset-btns">
-                <Link className="cancel" to="/">
-                  Cancel
-                </Link>
-                <a
-                  onClick={handlefindUser}
-                  type="submit"
-                  className="continue"
-                  href="#"
-                >
-                  Search
-                </a>
-              </div>
-            </div>
+      <div className="fb-auth">
+        <div style={{ width: "auto" }} className="auth-wraper">
+          <div className="auth-right">
+            <img src={fblogo} alt="" />
+            <Register setRegister={setRegister} />
+            <p>
+              <a href="#">Create a Page</a> for a celebrity, brand or business.
+            </p>
           </div>
         </div>
       </div>
@@ -234,4 +161,4 @@ const Forgot = () => {
   );
 };
 
-export default Forgot;
+export default RegisterPages;

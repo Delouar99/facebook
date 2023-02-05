@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 const AuthRedirect = ({ children }) => {
   const { loginState } = useSelector((state) => state.auth);
-  // console.log(loginState);
+
   return loginState ? children : <Navigate to="/login" />;
 };
 

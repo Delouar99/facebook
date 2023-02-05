@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 
 const Userpost = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <>
       <div className="user-post">
@@ -9,9 +12,9 @@ const Userpost = () => {
           <div className="post-info">
             <Avatar />
             <div className="user-details">
-              <a className="author" href="#">
-                Asraful Haque
-              </a>
+              <Link className="author" to="/profile">
+                {`${user.first_name} ${user.sur_name}`}
+              </Link>
               <span>
                 10m{" "}
                 <svg
@@ -23,7 +26,7 @@ const Userpost = () => {
                   title="Shared with Public"
                 >
                   <title>Shared with Public</title>
-                  <g fill-rule="evenodd" transform="translate(-448 -544)">
+                  <g fillRule="evenodd" transform="translate(-448 -544)">
                     <g>
                       <path
                         d="M109.5 408.5c0 3.23-2.04 5.983-4.903 7.036l.07-.036c1.167-1 1.814-2.967 2-3.834.214-1 .303-1.3-.5-1.96-.31-.253-.677-.196-1.04-.476-.246-.19-.356-.59-.606-.73-.594-.337-1.107.11-1.954.223a2.666 2.666 0 0 1-1.15-.123c-.007 0-.007 0-.013-.004l-.083-.03c-.164-.082-.077-.206.006-.36h-.006c.086-.17.086-.376-.05-.529-.19-.214-.54-.214-.804-.224-.106-.003-.21 0-.313.004l-.003-.004c-.04 0-.084.004-.124.004h-.037c-.323.007-.666-.034-.893-.314-.263-.353-.29-.733.097-1.09.28-.26.863-.8 1.807-.22.603.37 1.166.667 1.666.5.33-.11.48-.303.094-.87a1.128 1.128 0 0 1-.214-.73c.067-.776.687-.84 1.164-1.2.466-.356.68-.943.546-1.457-.106-.413-.51-.873-1.28-1.01a7.49 7.49 0 0 1 6.524 7.434"
@@ -34,7 +37,7 @@ const Userpost = () => {
                         transform="translate(354 143.5)"
                       ></path>
                       <path
-                        fill-rule="nonzero"
+                        fillRule="nonzero"
                         d="M110 408.5a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-1 0a7 7 0 1 0-14 0 7 7 0 0 0 14 0z"
                         transform="translate(354 143.5)"
                       ></path>
@@ -53,7 +56,7 @@ const Userpost = () => {
                 height="1em"
                 className="x1lliihq x1k90msu x2h7rmj x1qfuztq xcza8v6 x1qx5ct2 xw4jnvo"
               >
-                <g fill-rule="evenodd" transform="translate(-446 -350)">
+                <g fillRule="evenodd" transform="translate(-446 -350)">
                   <path d="M458 360a2 2 0 1 1-4 0 2 2 0 0 1 4 0m6 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0m-12 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0"></path>
                 </g>
               </svg>
@@ -90,8 +93,8 @@ const Userpost = () => {
                             y1="0%"
                             y2="100%"
                           >
-                            <stop offset="0%" stop-color="#FF6680" />
-                            <stop offset="100%" stop-color="#E61739" />
+                            <stop offset="0%" stopColor="#FF6680" />
+                            <stop offset="100%" stopColor="#E61739" />
                           </linearGradient>
                           <filter
                             id="c"
@@ -146,8 +149,8 @@ const Userpost = () => {
                             y1="0%"
                             y2="100%"
                           >
-                            <stop offset="0%" stop-color="#18AFFF" />
-                            <stop offset="100%" stop-color="#0062DF" />
+                            <stop offset="0%" stopColor="#18AFFF" />
+                            <stop offset="100%" stopColor="#0062DF" />
                           </linearGradient>
                           <filter
                             id="c"

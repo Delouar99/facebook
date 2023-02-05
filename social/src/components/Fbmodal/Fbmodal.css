@@ -1,0 +1,55 @@
+.blur-box {
+  z-index: 99999999999;
+}
+
+.Fb-modalwraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.fb-modal-popup {
+  width: 700px;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 10px;
+}
+
+.fb-modal-header {
+  padding: 15px 15px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.fb-modal-header .title {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.fb-modal-header button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  bottom: 0px;
+  display: block;
+  margin: auto;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: 0.2s;
+}
+
+.fb-modal-header button:hover {
+  background-color: #ccc;
+}

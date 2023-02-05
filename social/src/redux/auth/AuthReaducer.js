@@ -6,6 +6,8 @@ import {
   REGISTER_SUCCESS,
   TOKEN_USER_FAILD,
   TOKEN_USER_SUCCESS,
+  USER_LOGOUT,
+  USER_PROFILE_UPDATE,
 } from "./actionTyfe.js";
 import initaalState from "./initaalState.js";
 
@@ -54,7 +56,6 @@ const AuthReaducer = (state = initaalState, { type, payload }) => {
     case TOKEN_USER_SUCCESS:
       return {
         ...state,
-        lodding: false,
         user: payload,
         loginState: true,
       };
@@ -62,9 +63,24 @@ const AuthReaducer = (state = initaalState, { type, payload }) => {
     case TOKEN_USER_FAILD:
       return {
         ...state,
-        lodding: false,
         user: {},
         loginState: false,
+      };
+
+    case USER_LOGOUT:
+      return {
+        ...state,
+        user: {},
+        loginState: false,
+      };
+
+    case USER_PROFILE_UPDATE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...payload,
+        },
       };
 
     default:

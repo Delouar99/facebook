@@ -1,8 +1,8 @@
 import express from "express";
 import {
-  loggedinUser,
   login,
   register,
+  loggedinUser,
   acctivateAccount,
   acctivateAccountBycode,
   forgotPassword,
@@ -13,6 +13,7 @@ import {
   sendPasswordotpLink,
   checkPasswordResetOtp,
   passwordReset,
+  userProfileUpdate,
 } from "../controllers/userControler.js";
 
 //init router
@@ -22,6 +23,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.get("/me", loggedinUser);
+router.put("/profile-update/:id", userProfileUpdate);
 router.get("/activate/:token", acctivateAccount);
 router.post("/code-activation", acctivateAccountBycode);
 router.post("/resend-Link", resendActivation);

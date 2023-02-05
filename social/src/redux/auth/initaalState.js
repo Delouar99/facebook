@@ -3,7 +3,7 @@
  */
 const initaalState = {
   user: {},
-  loginState: true,
+  loginState: false,
   lodding: false,
   message: null,
 };

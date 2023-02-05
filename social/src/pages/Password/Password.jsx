@@ -25,7 +25,7 @@ const Password = () => {
           {
             id: Cookies.get("cpid"),
             code: Cookies.get("cpcode"),
-            Password,
+            Password: password,
           },
           navigate
         )

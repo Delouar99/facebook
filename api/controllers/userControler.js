@@ -348,34 +348,27 @@ export const login = async (req, res, next) => {
 
 export const loggedinUser = async (req, res, next) => {
   try {
-    const Auth_token = req.headers.authorization;
+    const auth_token = req.headers.authorization;
 
-    if (!Auth_token) {
+    if (!auth_token) {
       return next(createError(400, "token not found"));
     }
 
-    if (Auth_token) {
-      const token = Auth_token.split(" ")[1];
+    if (auth_token) {
+      const token = auth_token.split(" ")[1];
       const user = tokenVerify(token);
-      console.log(token);
-      if (!user) {
-        return next(createError(400, "invalild token"));
-      }
 
-      let loggedin_User = {};
       if (user) {
-        loggedin_User = await User.findById(user.id);
-      }
+        const loggedinUser = await User.findById(user.id);
 
-      if (!loggedin_User) {
-        return next(createError(400, "loggdnUser not found"));
-      }
-
-      if (loggedin_User) {
-        res.status(200).json({
-          message: "Ueer data stavle",
-          user: loggedin_User,
-        });
+        if (!loggedinUser) {
+          return next(createError(400, "user data not match"));
+        } else {
+          res.status(200).json({
+            message: "user data Stavle",
+            user: loggedinUser,
+          });
+        }
       }
     }
   } catch (error) {
@@ -850,6 +843,31 @@ export const passwordReset = async (req, res, next) => {
         });
     }
   } catch (error) {
-    next(error);
+    // next(error.message);
+    console.log(error.message);
+  }
+};
+
+/**
+ * profile update
+ */
+
+export const userProfileUpdate = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const user = await User.findByIdAndUpdate(id, data);
+
+    if (user) {
+      res.status(200).json({
+        message: "profile update successfully",
+      });
+
+      if (!user) {
+        return next(createError(400, "profile update faild"));
+      }
+    }
+  } catch (error) {
+    return next(error);
   }
 };
